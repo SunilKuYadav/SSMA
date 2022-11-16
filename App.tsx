@@ -1,16 +1,20 @@
+import {NavigationContainer} from '@react-navigation/native';
 import React from 'react';
-import {StyleSheet, View} from 'react-native';
+import {StyleSheet} from 'react-native';
+import {SafeAreaView} from 'react-native-safe-area-context';
 import {Provider} from 'react-redux';
 
-import {Counter} from './src/pages';
+import Navigation from './src/navigation';
 import {store} from './src/_app';
 
 const App = () => {
   return (
     <Provider store={store}>
-      <View style={styles.wrapper}>
-        <Counter />
-      </View>
+      <NavigationContainer>
+        <SafeAreaView style={styles.container}>
+          <Navigation />
+        </SafeAreaView>
+      </NavigationContainer>
     </Provider>
   );
 };
@@ -18,9 +22,7 @@ const App = () => {
 export default App;
 
 const styles = StyleSheet.create({
-  wrapper: {
+  container: {
     flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
   },
 });
