@@ -1,21 +1,36 @@
 import React from 'react';
-import {StyleSheet, Text, View} from 'react-native';
+import {ScrollView, StyleSheet, Text} from 'react-native';
 
-const Dashboard = () => {
+const Dashboard = ({navigation}: {navigation: any}) => {
+  const handleOnPress: (type: string) => void = (type: string) => {
+    switch (type) {
+      case 'Alarm':
+        navigation.navigate('Alarm');
+        break;
+      case 'Timer':
+        navigation.navigate('Counter');
+        break;
+    }
+  };
+
   return (
-    <View style={styles.wrapper}>
-      <Text style={styles.box}>1</Text>
-      <Text style={styles.box}>2</Text>
-      <Text style={styles.box}>3</Text>
-      <Text style={styles.box}>4</Text>
-      <Text style={styles.box}>5</Text>
-      <Text style={styles.box}>6</Text>
-      <Text style={styles.box}>7</Text>
-      <Text style={styles.box}>8</Text>
-      <Text style={styles.box}>9</Text>
-      <Text style={styles.box}>10</Text>
-      <Text style={styles.box}>11</Text>
-    </View>
+    <ScrollView style={styles.wrapper}>
+      <Text style={styles.box} onPress={() => handleOnPress('Alarm')}>
+        Alarm
+      </Text>
+      <Text style={styles.box}>To Do</Text>
+      <Text style={styles.box} onPress={() => handleOnPress('Timer')}>
+        Timer
+      </Text>
+      <Text style={styles.box}>Reminder</Text>
+      <Text style={styles.box}>SM-based Tracker</Text>
+      <Text style={styles.box}>Music Player</Text>
+      <Text style={styles.box}>Video Player</Text>
+      <Text style={styles.box}>Camera</Text>
+      <Text style={styles.box}>Blutooth Connectivity</Text>
+      <Text style={styles.box}>Wifi Connectivity</Text>
+      <Text style={styles.box}>Hotspot Data Share</Text>
+    </ScrollView>
   );
 };
 
@@ -24,15 +39,19 @@ export default Dashboard;
 const styles = StyleSheet.create({
   wrapper: {
     flex: 1,
-    flexDirection: 'row',
-    flexWrap: 'wrap',
-    margin: 10,
-    marginTop: 100,
+    flexDirection: 'column',
+    // flexWrap: 'wrap',
+    padding: 10,
+    marginTop: 50,
+    width: '100%',
+    marginBottom: 20,
   },
   box: {
+    textAlign: 'center',
     borderWidth: 2,
-    width: 100,
+    borderRadius: 10,
+    height: 50,
     padding: 5,
-    margin: 10,
+    marginVertical: 10,
   },
 });
