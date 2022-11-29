@@ -10,6 +10,9 @@ const Dashboard = ({navigation}: {navigation: any}) => {
       case 'Timer':
         navigation.navigate('Counter');
         break;
+      case 'Camera':
+        navigation.navigate('Camera');
+        break;
     }
   };
 
@@ -26,7 +29,9 @@ const Dashboard = ({navigation}: {navigation: any}) => {
       <Text style={styles.box}>SM-based Tracker</Text>
       <Text style={styles.box}>Music Player</Text>
       <Text style={styles.box}>Video Player</Text>
-      <Text style={styles.box}>Camera</Text>
+      <Text style={styles.box} onPress={() => handleOnPress('Camera')}>
+        Camera
+      </Text>
       <Text style={styles.box}>Blutooth Connectivity</Text>
       <Text style={styles.box}>Wifi Connectivity</Text>
       <Text style={styles.box}>Hotspot Data Share</Text>
@@ -40,7 +45,6 @@ const styles = StyleSheet.create({
   wrapper: {
     flex: 1,
     flexDirection: 'column',
-    // flexWrap: 'wrap',
     padding: 10,
     marginTop: 50,
     width: '100%',
@@ -50,8 +54,9 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     borderWidth: 2,
     borderRadius: 10,
-    height: 50,
+    height: 40,
     padding: 5,
+    fontSize: 20,
     marginVertical: 10,
   },
 });
