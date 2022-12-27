@@ -4,7 +4,7 @@ import {Button, Text, View} from 'react-native';
 import {useAppDispatch, useAppSelector} from '../../_app';
 import {decrement, increment} from '../../_features';
 
-const Counter = () => {
+const Timer = () => {
   const dispatch = useAppDispatch();
 
   const count = useAppSelector(state => state.counter.value);
@@ -23,4 +23,4 @@ const Counter = () => {
   );
 };
 
-export default Counter;
+export default Timer;
