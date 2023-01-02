@@ -10,7 +10,11 @@ const Navigation = () => {
   return (
     <Stack.Navigator initialRouteName="Dashboard">
       {DASHBOARD_PAGES_LIST.map(item => (
-        <Stack.Screen name={item.naviagteTo} component={item.component} />
+        <Stack.Screen
+          key={item.name}
+          name={item.naviagteTo}
+          component={item.component}
+        />
       ))}
     </Stack.Navigator>
   );
