@@ -1,4 +1,4 @@
-import {Alarm, Timer} from '../../pages';
+import {Alarm, Timer, Todo} from '../../pages';
 
 const DASHBOARD_PAGES_LIST: {
   name: string;
@@ -6,7 +6,7 @@ const DASHBOARD_PAGES_LIST: {
   component: any;
 }[] = [
   {name: 'Alarm', naviagteTo: 'Alarm', component: Alarm},
-  // {name: 'To Do', naviagteTo: 'Dashboard', component: },
+  {name: 'To Do', naviagteTo: 'ToDo', component: Todo},
   {name: 'Timer', naviagteTo: 'Timer', component: Timer},
   // {name: 'Reminder', naviagteTo: '', component: },
   // {name: 'SM-based Tracker', naviagteTo: '', component: },
