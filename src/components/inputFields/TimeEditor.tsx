@@ -1,16 +1,6 @@
 import React from 'react';
 import {View, TextInput, Text, StyleSheet} from 'react-native';
-
-interface TimeProps {
-  minutes: number;
-  hours: number;
-}
-interface TimeEditorProps {
-  time: TimeProps;
-  onPress?: () => void;
-  onHoursPress: (text: string) => void;
-  onMinutesPress: (text: string) => void;
-}
+import {TimeEditorProps} from '../../_types';
 
 const TimeEditor = (props: TimeEditorProps) => {
   return (

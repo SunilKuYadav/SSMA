@@ -1,12 +1,17 @@
+import {NativeStackNavigationProp} from '@react-navigation/native-stack';
 import React from 'react';
-import {View, Text, StyleSheet, FlatList} from 'react-native';
+import {View, Text, StyleSheet} from 'react-native';
 
 import {CircularButton} from '../../components';
+import {RootStackParamList} from '../../_types';
 
-const Alarm = ({navigation}) => {
+type Props = NativeStackNavigationProp<RootStackParamList, 'Alarm'>;
+
+const Alarm = ({navigation}: {navigation: Props}) => {
   const handleAddAlarmOnPress: () => void = () => {
     navigation.navigate('AddAlarm');
   };
+
   return (
     <View style={styles.wrapper}>
       <Text>Alarm</Text>

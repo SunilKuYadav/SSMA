@@ -1,10 +1,7 @@
 import {Alarm, Timer} from '../../pages';
+import {DashboardPagesArray} from '../../_types';
 
-const DASHBOARD_PAGES_LIST: {
-  name: string;
-  naviagteTo: string;
-  component: any;
-}[] = [
+const DASHBOARD_PAGES_LIST: DashboardPagesArray[] = [
   {name: 'Alarm', naviagteTo: 'Alarm', component: Alarm},
   // {name: 'To Do', naviagteTo: 'Dashboard', component: },
   {name: 'Timer', naviagteTo: 'Timer', component: Timer},
