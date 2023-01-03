@@ -3,12 +3,10 @@ import {ScrollView, StyleSheet, Text} from 'react-native';
 
 import {APP_CONSTANT} from '../../config';
 
-const {DASHBOARD_PAGES_LIST} = APP_CONSTANT;
-
 const Dashboard = ({navigation}: {navigation: any}) => {
   return (
     <ScrollView contentContainerStyle={styles.wrapper}>
-      {DASHBOARD_PAGES_LIST.map(item => (
+      {APP_CONSTANT.DASHBOARD_PAGES_LIST.map(item => (
         <Text
           key={item.name}
           style={styles.box}
