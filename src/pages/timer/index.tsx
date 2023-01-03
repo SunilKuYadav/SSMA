@@ -1,6 +1,5 @@
 import React, {useEffect, useState} from 'react';
 import {
-  Button,
   ScrollView,
   StyleSheet,
   Text,
@@ -10,6 +9,7 @@ import {
 } from 'react-native';
 
 import {getFormatedTimeByMiliSecond} from '../../utils';
+import {Button} from '../../components';
 
 const Timer = () => {
   // timer states
@@ -71,6 +71,7 @@ const Timer = () => {
 
     if (stopWatchStatus) {
       // if status is true then start interval of 100 mili second
+      setStopWatchPings([]);
       interval = setInterval(() => {
         setStopWatchTimmer(prev => prev + 1);
       }, 100);
@@ -98,35 +99,42 @@ const Timer = () => {
             onChangeText={handleTimerInput}
           />
         </View>
-        <Text style={styles.time(timerStatus)}>
-          {getFormatedTimeByMiliSecond(timer)}
-        </Text>
+        <View style={styles.center}>
+          <Text style={styles.time(timerStatus)}>
+            {getFormatedTimeByMiliSecond(timer)}
+          </Text>
+        </View>
         <Button
-          style={styles.btn}
           title={timerStatus ? 'stop' : 'start'}
           onPress={handleTimerStatus}
         />
       </View>
       <View style={styles.cardWrapper}>
         <Text style={styles.title}>Stop Watch</Text>
-        <Text style={styles.time(stopWatchStatus)}>
-          {getFormatedTimeByMiliSecond(stopWatchTimmer)}
-        </Text>
-        <Button
-          style={styles.btn}
-          title={stopWatchStatus ? 'stop' : 'start'}
-          onPress={handleStopWatchStatus}
-        />
-        <Button
-          style={styles.btn}
-          title="ping"
-          disabled={!stopWatchStatus}
-          onPress={handleStopWatchPings}
-        />
+        <View style={styles.center}>
+          <Text style={styles.time(stopWatchStatus)}>
+            {getFormatedTimeByMiliSecond(stopWatchTimmer)}
+          </Text>
+        </View>
+        <View style={styles.row}>
+          <Button
+            title={stopWatchStatus ? 'stop' : 'start'}
+            onPress={handleStopWatchStatus}
+          />
+          <Button
+            title="ping"
+            disabled={!stopWatchStatus}
+            onPress={handleStopWatchPings}
+          />
+        </View>
         {stopWatchPings.map((item, index) => (
           <View key={item} style={styles.row}>
-            <Text>{index + 1} - </Text>
-            <Text>{getFormatedTimeByMiliSecond(item)}</Text>
+            <Text>{stopWatchPings.length - index - 1} - </Text>
+            <Text>
+              {getFormatedTimeByMiliSecond(
+                stopWatchPings[stopWatchPings.length - index - 1],
+              )}
+            </Text>
           </View>
         ))}
       </View>
@@ -139,26 +147,35 @@ export default Timer;
 const styles = StyleSheet.create({
   cardWrapper: {
     flex: 1,
-    borderWidth: 4,
+    margin: 4,
+    borderWidth: 1,
+    padding: 5,
+    borderRadius: 5,
+    justifyContent: 'center',
   },
   row: {
     flexDirection: 'row',
     padding: 5,
     justifyContent: 'space-between',
   },
-  title: {fontSize: 20, fontWeight: 'bold'},
-  input: {borderWidth: 1, minWidth: 200, minHeight: 30, paddingHorizontal: 10},
-  btn: {
+  center: {
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  title: {fontSize: 20, fontWeight: 'bold', color: 'grey'},
+  input: {
     borderWidth: 1,
     minWidth: 200,
     minHeight: 30,
     paddingHorizontal: 10,
+    borderRadius: 5,
   },
   time: (active: boolean): TextStyle => ({
     fontSize: 30,
     fontWeight: 'bold',
-    color: active ? 'green' : 'red',
-    textAlign: 'center',
+    color: active ? '#008' : '#f005',
+    textAlign: 'left',
     margin: 10,
+    width: 180,
   }),
 });
