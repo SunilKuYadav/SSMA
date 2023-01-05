@@ -10,7 +10,7 @@ const CircularButton = ({
 }) => {
   return (
     <Pressable style={styles.button} onPress={labelAction}>
-      <Text>{label}</Text>
+      <Text style={styles.pressButton}>{label}</Text>
     </Pressable>
   );
 };
@@ -26,4 +26,5 @@ const styles = StyleSheet.create({
     padding: '4%',
     borderRadius: 100,
   },
+  pressButton: {fontSize: 25},
 });

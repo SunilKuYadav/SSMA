@@ -1,22 +1,92 @@
-import {NativeStackNavigationProp} from '@react-navigation/native-stack';
-import React from 'react';
-import {View, Text, StyleSheet} from 'react-native';
+import React, {useState} from 'react';
+import {View, StyleSheet} from 'react-native';
+import {DeleteIcon} from '../../assets';
 
-import {CircularButton} from '../../components';
-import {RootStackParamList} from '../../_types';
+import {APP_CONSTANT} from '../../config';
+import {
+  BasicModal,
+  CircularButton,
+  SwitchSection,
+  TextInputSection,
+  TimeEditor,
+} from '../../components';
+import {validateTimeInput} from '../../utils';
+import {AlarmModule} from '../../../NativeModules';
 
-type Props = NativeStackNavigationProp<RootStackParamList, 'Alarm'>;
+const ALARM_CONST = APP_CONSTANT?.STRING_CONSTANTS?.ALARM;
+type AlarmTime = {
+  hours: number;
+  minutes: number;
+};
 
-const Alarm = ({navigation}: {navigation: Props}) => {
-  const handleAddAlarmOnPress: () => void = () => {
-    navigation.navigate('AddAlarm');
+const Alarm = () => {
+  const [time, setTime] = useState<AlarmTime>({
+    hours: new Date().getHours(),
+    minutes: new Date().getMinutes(),
+  });
+  const [isVisible, setIsVisible] = useState<boolean>(false);
+  const [hasVibration, setVibration] = useState<boolean>(false);
+
+  const handleHourChange = (text: string) => {
+    validateTimeInput(text) &&
+      setTime(state => ({...state, hours: Number(text)}));
+  };
+  const handleMinuteChange = (text: string) => {
+    validateTimeInput(text) &&
+      setTime(state => ({...state, minutes: Number(text)}));
+  };
+  const handleAddAlarmOnPress: () => void = async () => {
+    setTime({
+      hours: new Date().getHours(),
+      minutes: new Date().getMinutes(),
+    });
+    setIsVisible(true);
+    // try {
+    //   const {createAlarmEvent} = AlarmModule;
+    //   await createAlarmEvent('Siddharth ', 'SidLocation');
+    // } catch (error) {
+    //   console.log('function call failed -- ', error);
+    // }
   };
 
   return (
     <View style={styles.wrapper}>
-      <Text>Alarm</Text>
       <View style={styles.alarmWrapper}>
         <CircularButton label="+" labelAction={handleAddAlarmOnPress} />
+        <BasicModal
+          isVisible={isVisible}
+          setIsVisible={setIsVisible}
+          title={ALARM_CONST?.ADD_ALARM_MODAL_TITLE}>
+          <View style={styles.modalBody}>
+            <TimeEditor
+              time={time}
+              onHoursPress={handleHourChange}
+              onMinutesPress={handleMinuteChange}
+            />
+            <View style={styles.alarmOptionsView}>
+              <TextInputSection
+                label="Label"
+                selectedValue="add your label here"
+              />
+              <TextInputSection
+                label="Snooze"
+                selectedValue="snooze time here"
+              />
+              <TextInputSection label="Music" selectedValue="music here" />
+              <SwitchSection
+                label="Vibration"
+                isSwitchEnabled={hasVibration}
+                setIsSwitchEnabled={setVibration}
+              />
+            </View>
+            <DeleteIcon
+              style={styles.deleteAlarmIcon}
+              width={50}
+              height={50}
+              fill={'#000'}
+            />
+          </View>
+        </BasicModal>
       </View>
     </View>
   );
@@ -32,5 +102,14 @@ const styles = StyleSheet.create({
     position: 'absolute',
     bottom: '12%',
     right: '8%',
+  },
+  modalBody: {flex: 1},
+  alarmOptionsView: {
+    marginTop: '5%',
+  },
+  deleteAlarmIcon: {
+    position: 'absolute',
+    alignSelf: 'center',
+    bottom: '10%',
   },
 });

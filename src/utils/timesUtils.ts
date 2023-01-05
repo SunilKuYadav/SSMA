@@ -1,3 +1,5 @@
+const numOnlyRegex = /^[0-9]*$/;
+
 const getFormatedTimeByMiliSecond = (second: number) => {
   let mili: string | number = second % 10;
 
@@ -15,5 +17,8 @@ const getFormatedTimeByMiliSecond = (second: number) => {
 
   return `${hour}:${min}:${sec}:${mili}`;
 };
+const validateTimeInput = (time: string) =>
+  time.match(numOnlyRegex) ? true : false;
 
-export {getFormatedTimeByMiliSecond};
+const getTimeText = (time: string) => (time.length === 1 ? `0${time}` : time);
+export {getFormatedTimeByMiliSecond, validateTimeInput, getTimeText};

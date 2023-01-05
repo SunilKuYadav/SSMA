@@ -1,23 +1,10 @@
 import React from 'react';
 import {View, StyleSheet, Text, TouchableOpacity} from 'react-native';
+import {TextInpSection} from '../../_types';
 
-interface CustomSectionProps {
-  label: string;
-  selectedValue: string;
-  selectedValueOnPress?: string;
-  icon?: any;
-  showButton?: boolean;
-  buttonOnPress?: () => void;
-}
-const AlarmCustomSection = (props: CustomSectionProps) => {
-  const {
-    label,
-    selectedValue,
-    // selectedValueOnPress,
-    // icon,
-    // showButton,
-    // buttonOnPress,
-  } = props;
+const TextInputSection = (props: TextInpSection) => {
+  const {label, selectedValue} = props;
+
   return (
     <TouchableOpacity style={styles.container}>
       <View style={styles.textContainer}>
@@ -28,17 +15,17 @@ const AlarmCustomSection = (props: CustomSectionProps) => {
   );
 };
 
-export default AlarmCustomSection;
+export default TextInputSection;
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: '#9e9d9d',
     paddingHorizontal: '5%',
     paddingVertical: '2%',
+    marginVertical: '2%',
   },
   textContainer: {
+    flexDirection: 'row',
     justifyContent: 'space-between',
+    alignItems: 'center',
   },
-  valueText: {
-    marginTop: 10,
-  },
+  valueText: {},
 });
