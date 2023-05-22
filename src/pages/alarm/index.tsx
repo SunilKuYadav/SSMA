@@ -36,17 +36,17 @@ const Alarm = () => {
       setTime(state => ({...state, minutes: Number(text)}));
   };
   const handleAddAlarmOnPress: () => void = async () => {
-    setTime({
-      hours: new Date().getHours(),
-      minutes: new Date().getMinutes(),
-    });
-    setIsVisible(true);
-    // try {
-    //   const {createAlarmEvent} = AlarmModule;
-    //   await createAlarmEvent('Siddharth ', 'SidLocation');
-    // } catch (error) {
-    //   console.log('function call failed -- ', error);
-    // }
+    // setTime({
+    //   hours: new Date().getHours(),
+    //   minutes: new Date().getMinutes(),
+    // });
+    // setIsVisible(true);
+    try {
+      const {createAlarmEvent} = AlarmModule;
+      await createAlarmEvent('Siddharth ', 'SidLocation');
+    } catch (error) {
+      throw new Error('Failed to connect to bridge @line48alarm/index.ts');
+    }
   };
 
   return (
